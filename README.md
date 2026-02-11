@@ -29,10 +29,10 @@ This repository is a comprehensive collection of Docker learning materials that 
 
 ```bash
 # Clone the repository
-git clone https://github.com/[username]/docker-mastery-journey.git
+git clone https://github.com/babaktanriverdi/DevOps_Docker.git
 
 # Navigate to a project
-cd docker-mastery-journey/docker-10-difference-between-exec-for...
+cd DevOps_Docker/
 
 # Read and learn!
 cat README.md
