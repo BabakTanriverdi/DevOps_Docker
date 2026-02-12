@@ -60,7 +60,7 @@ docker info
 ```bash
 docker run -it alpine ash  #docker run=docker image pull + docker create
 ```
-Not: -i  --> interactive mode , -t --> terminal  . -it --> interactive terminal
+## Not: -i  --> interactive mode , -t --> terminal  . -it --> interactive terminal
 - Display the os release of the alpine container.
 
 ```bash
@@ -182,7 +182,7 @@ cd test && echo "This file is created in the container babak" > i-will-persist.t
 ls && cat i-will-persist.txt
 ```
 
-- Exit the `babak` container and return to ec2-user bash shell.
+- Exit the `babak` container and return to `ec2-user` bash shell.
 
 ```bash
 exit
@@ -246,6 +246,7 @@ exit
 ```
 
 - Run a `ubuntu` container with interactive shell open, name the container as `babak3`, attach the volume `my-vol` to `/test3` mount point in the container, and add command to run bash shell.
+
 
 ```bash
 docker run -it --name babak3 -v my-vol:/test3 ubuntu bash
