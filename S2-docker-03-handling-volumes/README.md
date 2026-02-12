@@ -60,7 +60,7 @@ docker info
 ```bash
 docker run -it alpine ash  #docker run=docker image pull + docker create
 ```
-## Not: -i  --> interactive mode , -t --> terminal  . -it --> interactive terminal
+## Note: -i  --> interactive mode , -t --> terminal  . -it --> interactive terminal
 - Display the os release of the alpine container.
 
 ```bash
@@ -91,7 +91,7 @@ docker start 2ae
 docker ps
 docker exec -it 2ae ash # you can execute command in the running container(exec)
 ```
-## Not: 
+## Note: 
 Container outband rules are allow anywhere by default but inbound rules are totally deny. You can go from container everywhere but for inbound you must publish the port expilixitly.
 
 - Show that the file `short-life.txt` is still there, and explain why it is there. (Container holds it data until removed).
@@ -115,7 +115,7 @@ docker ps -a
 ```bash
 docker stop 2a && docker rm 2a # with stopp remove the container 
 ```
-## Not: 
+## Note: 
 
 docker rm -f 2a = docker stop 2a && docker rm 2a 
 
@@ -481,7 +481,7 @@ docker container ls
 ```
 
 ## Part 6 - Bind Mounts (we can attach any folder to container not only volume). It is same with volume mounting.
-### Not : Volume always works with "sudo"
+### Note : Volume always works with "sudo"
 
 - Run the `nginx` container at the detached mod, name the container as `nginx-default`, and open <public-ip> on browser and show the nginx default page.
 
@@ -637,7 +637,7 @@ local     7cbbc785f43581c3300f0ad0bc0dccb61506582df2e56076eee34ab9d3a9bb63
 ```bash
 docker run -dit --rm -v /data --name cont2 busybox sh # with "--rm" the anonymous volume is also deleted when the container stops.
 ```
-## Not : "--rm" remove only anonymous volumes automaticly not outher volumes
+## Note : "--rm" remove only anonymous volumes automaticly not other volumes
 
 - Check the available volumes and see if an anonymous volume has been created. 
 
@@ -668,12 +668,12 @@ DRIVER    VOLUME NAME
 
 - The anonymous volume is automatically removed along with the container.
 
-## Not: 
+## Note: 
 stdout 
 docker run -p 80:80 nginx # see on browser
 docker logs ce
 
-## Not:
+## Note:
 
 docker exec → Used to run a new command or open a new terminal inside a running container.
 
