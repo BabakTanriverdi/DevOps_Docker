@@ -157,7 +157,7 @@ docker container run -dit --network mynet --name mycont1 alpine ash
 docker container run -dit --network mynet --name mycont2 alpine ash
 docker container run -dit --name mycont3 alpine ash
 docker container run -dit --name mycont4 alpine ash
-docker network connect mynet mycont4            #!!!!!! 3 yap
+docker network connect mynet mycont4       
 ```
 
 - List all running containers and show them up and running.
