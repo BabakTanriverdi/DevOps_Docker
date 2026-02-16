@@ -142,13 +142,14 @@ if __name__ == "__main__":
 
 ```Dockerfile
 FROM ubuntu
+WORKDIR /app
 RUN apt-get update -y
 RUN apt-get install python3 -y
 RUN apt-get install python3-pip -y
 RUN pip3 install Flask --break-system-packages
-COPY . /app
-WORKDIR /app
-CMD python3 ./welcome.py
+COPY . .
+EXPOSE 80
+CMD ["python3", "./welcome.py"]
 ```
 
 - Build Docker image from Dockerfile locally, tag it as `<Your_Docker_Hub_Account_Name>/flask-app:1.0` and explain steps of building. Note that repo name is the combination of `<Your_Docker_Hub_Account_Name>/<Your_Image_Name>`.
@@ -183,11 +184,11 @@ docker push babaktanriverdi/flask-app:1.0
 
 ```Dockerfile
 FROM python:alpine
+WORKDIR /app
 RUN pip install flask
 COPY . /app
-WORKDIR /app
 EXPOSE 80
-CMD python ./welcome.py
+CMD ["python", "./welcome.py"]
 ```
 
 - Build Docker image from Dockerfile locally, tag it as `<Your_Docker_Hub_Account_Name>/<Your_Image_Name>:<Tag>` and explain steps of building. Note that the repo name is the combination of `<Your_Docker_Hub_Account_Name>/<Your_Image_Name>`.
@@ -228,4 +229,37 @@ docker image tag babaktanriverdi/flask-app:2.0 babaktanriverdi/flask-app:latest
 
 ```bash
 docker image rm 497
+```
+
+
+
+```bash
+# 1. Login to Docker Hub
+docker login
+
+# 2. Build the image using Dockerfile-alpine
+docker build -t babaktanriverdi/flask-app:2.0 -f ./Dockerfile-alpine .
+
+# 3. Push the image to Docker Hub
+docker push babaktanriverdi/flask-app:2.0
+
+# 4. (Optional) Verify the image was created
+docker images | grep flask-app
+
+```
+
+
+
+```bash
+# 1. Login to Docker Hub
+docker login
+
+# 2. Build the image
+docker build -t flask-app:1.0 .
+
+# 3. Tag the image with your Docker Hub username
+docker tag flask-app:1.0 babaktanriverdi/flask-app:1.0
+
+# 4. Push the image to Docker Hub
+docker push babaktanriverdi/flask-app:1.0
 ```
