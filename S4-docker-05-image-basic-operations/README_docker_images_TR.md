@@ -142,13 +142,14 @@ if __name__ == "__main__":
 
 ```Dockerfile
 FROM ubuntu
+WORKDIR /app
 RUN apt-get update -y
 RUN apt-get install python3 -y
 RUN apt-get install python3-pip -y
 RUN pip3 install Flask --break-system-packages
-COPY . /app
-WORKDIR /app
-CMD python3 ./welcome.py
+COPY . .
+EXPOSE 80
+CMD ["python3", "./welcome.py"]
 ```
 
 - Dockerfile'dan yerel olarak Docker image oluşturun, `<Your_Docker_Hub_Account_Name>/flask-app:1.0` olarak etiketleyin ve oluşturma adımlarını açıklayın. Repo adının `<Your_Docker_Hub_Account_Name>/<Your_Image_Name>` kombinasyonu olduğunu unutmayın.
@@ -183,11 +184,11 @@ docker push babaktanriverdi/flask-app:1.0
 
 ```Dockerfile
 FROM python:alpine
+WORKDIR /app
 RUN pip install flask
 COPY . /app
-WORKDIR /app
 EXPOSE 80
-CMD python ./welcome.py
+CMD ["python", "./welcome.py"]
 ```
 
 - Dockerfile'dan yerel olarak Docker image oluşturun, `<Your_Docker_Hub_Account_Name>/<Your_Image_Name>:<Tag>` olarak etiketleyin ve oluşturma adımlarını açıklayın. Repo adının `<Your_Docker_Hub_Account_Name>/<Your_Image_Name>` kombinasyonu olduğunu unutmayın.
@@ -228,4 +229,36 @@ docker image tag babaktanriverdi/flask-app:2.0 babaktanriverdi/flask-app:latest
 
 ```bash
 docker image rm 497
+```
+
+
+
+```bash
+# 1. Docker Hub'a giriş yap
+docker login
+
+# 2. Dockerfile-alpine kullanarak image'ı build et
+docker build -t babaktanriverdi/flask-app:2.0 -f ./Dockerfile-alpine .
+
+# 3. Image'ı Docker Hub'a push et
+docker push babaktanriverdi/flask-app:2.0
+
+# 4. (İsteğe bağlı) Image'ın oluştuğunu kontrol et
+docker images | grep flask-app
+```
+
+
+
+```bash
+# 1. Docker Hub'a giriş yap
+docker login
+
+# 2. Image'ı build et
+docker build -t flask-app:1.0 .
+
+# 3. Image'ı Docker Hub kullanıcı adınla tag'le
+docker tag flask-app:1.0 babaktanriverdi/flask-app:1.0
+
+# 4. Image'ı Docker Hub'a push et
+docker push babaktanriverdi/flask-app:1.0
 ```
