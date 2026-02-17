@@ -120,16 +120,16 @@ The image contains all the dependencies for the application, including Python it
 
 https://flask-mysql.readthedocs.io/en/stable/
 
-```Dockerfile
+```Dockerfile 
 FROM python:3.12-alpine
 WORKDIR /code
-ENV FLASK_APP app.py
-ENV FLASK_RUN_HOST 0.0.0.0
+ENV FLASk_APP=app.py
+ENV FLASK_RUN_HOST=0.0.0.0
 RUN apk add --no-cache gcc musl-dev linux-headers
-COPY requirements.txt requirements.txt
-RUN pip install -r requirements.txt
-EXPOSE 5000
+COPY requirments.txt .
+RUN pip install -r requirments.txt
 COPY . .
+EXPOSE 5000
 CMD ["flask", "run"]
 ```
 
@@ -308,7 +308,7 @@ def hello():
 docker compose up
 ```
 
-- Enter http://`ec2-host-name`:5000/ in a browser, and check if the app has updated. Show that the changes do NOTE occur in the browser. Explain that it needs `docker compose up --build` command to refresh the image.
+- Enter http://`ec2-host-name`:5000/ in a browser, and check if the app has updated. Show that the changes do NOT occur in the browser. Explain that it needs `docker compose up --build` command to refresh the image.
 
 - Press `Ctrl+C` to stop containers. Run `docker compose down` command and remove the containers.
 
@@ -321,6 +321,7 @@ docker compose down
 ```bash
 docker compose up --build
 docker compose up -d --build
+# docker compose up -d --build (container_name)
 ```
 
 - Enter http://`ec2-host-name`:5000/ in a browser, and check if the app has updated. Show that the changes took place on the browser.
@@ -340,9 +341,17 @@ docker ps -a
 ## NOTE
 
 ```bash
-docker compose -p myproject up    # override the name of project
+docker compose -p myproject up                    # Start and run all services under the project name "myproject"
+# docker compose -p myproject down                # Stop and remove containers and networks for "myproject"
+# docker compose -p myproject down -v             # Stop and remove containers, networks AND volumes for "myproject"
+# docker compose -p myproject down --rmi all      # Stop and remove containers, networks AND all images used by services
+# docker compose -p myproject down -v --rmi all   # Stop and remove containers, networks, volumes AND all images
+
 docker compose up --scale web=3   # scale up the service container
+docker compose up --scale web=3 --scale redis=3 -d #Starts 3 instances of the web service and 3 instances of the redis service in detached mode (runs in the background)
 ```
+### ⚠️ Warning: When using --scale, if you have defined a fixed host port (like "8080:80") in the ports section of your service, you will get an error. This is because 3 containers cannot bind to the same host port at the same time. Instead, just expose the container port ("80") and let a reverse proxy (like Nginx or Traefik) handle the routing.
+
 
 ## NOTE
 
