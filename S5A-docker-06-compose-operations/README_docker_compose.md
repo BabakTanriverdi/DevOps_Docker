@@ -348,7 +348,7 @@ docker compose -p myproject up                    # Start and run all services u
 # docker compose -p myproject down -v --rmi all   # Stop and remove containers, networks, volumes AND all images
 
 docker compose up --scale web=3   # scale up the service container
-docker compose up --scale web=3 --scale redis=3 -d #Starts 3 instances of the web service and 3 instances of the redis service in detached mode (runs in the background)
+docker compose up --scale web=3 --scale redis=3 -d #starts 3 instances of the web service and 3 instances of the redis service in detached mode (runs in the background)
 ```
 ### ⚠️ Warning: When using --scale, if you have defined a fixed host port (like "8080:80") in the ports section of your service, you will get an error. This is because 3 containers cannot bind to the same host port at the same time. Instead, just expose the container port ("80") and let a reverse proxy (like Nginx or Traefik) handle the routing.
 
