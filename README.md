@@ -138,7 +138,7 @@ cat README.md
 <tr>
 <td width="50%">
 
-#### ⚙️ [EXEC vs CMD](./docker-10-difference-between-exec-for...)
+#### ⚙️ [EXEC vs CMD](./Extra-01_Exec_Shell_CMD_Entrypoit)
 **Container Entry Points**
 - ✅ Shell form vs Exec form
 - ✅ Process management
