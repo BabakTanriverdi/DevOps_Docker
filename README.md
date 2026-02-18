@@ -138,7 +138,7 @@ cat README.md
 <tr>
 <td width="50%">
 
-#### ⚙️ [EXEC vs CMD](./Extra-01_Exec_Shell_CMD_Entrypoit)
+#### ⚙️ [EXEC vs CMD](./Extra-01_Exec_Shell_CMD_Entrypoint)
 **Container Entry Points**
 - ✅ Shell form vs Exec form
 - ✅ Process management
