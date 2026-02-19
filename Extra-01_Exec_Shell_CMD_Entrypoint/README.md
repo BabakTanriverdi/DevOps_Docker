@@ -1,4 +1,4 @@
-# Hands-on Docker-10: `exec` form and `shell` form, `CMD` and `ENTRYPOINT` instructions, and `ARG` instruction
+# Hands-on Extra-01: `exec` form and `shell` form, `CMD` and `ENTRYPOINT` instructions, and `ARG` instruction
 
 The purpose of this hands-on training is to give the students an understanding of the difference between:
 
