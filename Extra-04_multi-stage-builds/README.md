@@ -1,4 +1,4 @@
-# Hands-on Extra-04: Multi-stage builds
+# Hands-on Docker-14: Multi-stage builds
 
 The purpose of this hands-on training is to teach students how to create a multi-stage Dockerfile.
 
@@ -16,7 +16,7 @@ At the end of this hands-on training, students will be able to;
 
 ## Part 1 - Launch a Docker Machine Instance and Connect with SSH
 
-- Launch a Docker machine on Amazon Linux 2023 AMI with a security group allowing SSH connections using the [Cloudformation Template for Docker Machine Installation](../S1A-docker-01-installing-on-ec2-linux2/docker-installation-template.yml).
+- Launch a Docker machine on Amazon Linux 2023 AMI with a security group allowing SSH connections using the [Cloudformation Template for Docker Machine Installation](../docker-01-installing-on-ec2-linux2/docker-installation-template.yml).
 
 - Connect to your instance with SSH.
 
@@ -48,15 +48,15 @@ public class App {
 }
 ```
 
-- Create a Dockerfile as below. The following Dockerfile has two separate stages: one for creating a Java class, and another where we copy the class into.
+- Create a `Dockerfile` as below. The following Dockerfile has two separate stages: one for creating a Java class, and another where we copy the class into.
 
 ```Dockerfile
-FROM openjdk:11-jdk-slim AS builder   
-COPY . /app
+FROM eclipse-temurin:11-jdk-jammy AS builder
 WORKDIR /app
+COPY . .
 RUN javac App.java
 
-FROM openjdk:11-jre-slim
+FROM eclipse-temurin:11-jre-jammy
 WORKDIR /myapp
 COPY --from=builder /app .
 CMD ["java", "App"]
@@ -66,23 +66,31 @@ CMD ["java", "App"]
 
 ```bash
 docker build -t myimage .
-docker run myimage
+docker run --rm myimage
 ```
 
-- How does it work? The second FROM instruction starts a new build stage with the |`openjdk:11-jre-slim` image as its base. The COPY `--from=builder` line copies just the built artifact from the previous stage into this new stage. The JDK and any intermediate artifacts are left behind and not saved in the final image. Check the size of the image and notice that the size of `myimage` is less than `openjdk:11-jdk-slim`
-image.
+- How does it work? The second FROM instruction starts a new build stage with the |`eclipse-temurin:11-jre-jammy` image as its base. The COPY `--from=builder` line copies just the built artifact from the previous stage into this new stage. The JDK and any intermediate artifacts are left behind and not saved in the final image. Check the size of the image and notice that the size of `myimage` is less than `eclipse-temurin:11-jdk-jammy`
+  image.
 
 - Check the size of images
 
-```
-docker image ls
+```bash
+docker pull eclipse-temurin:11-jdk-jammy
+docker pull eclipse-temurin:11-jre-jammy
+docker image ls 
 ```
 
 - You get an output like this.
 
 ```bash
-REPOSITORY                                   TAG                            IMAGE ID       CREATED         SIZE
-myimage                                      latest                         554fd58105d1   15 hours ago    223MB
-openjdk                                      11-jre-slim                    764a04af3eff   14 months ago   223MB
-openjdk                                      11-jdk-slim                    8e687a82603f   14 months ago   424MB
+REPOSITORY                 TAG            IMAGE ID       CREATED         SIZE
+myimage                     latest         xxxxxxxx       1 minute ago    2xxMB
+eclipse-temurin             11-jre-jammy   xxxxxxxx       ...             2xxMB
+eclipse-temurin             11-jdk-jammy   xxxxxxxx       ...             4xxMB
+```
+
+```bash
+docker rmi -f myimage:latest
+docker rmi -f eclipse-temurin:11-jdk-jammy eclipse-temurin:11-jre-jammy
+docker image prune -af
 ```
