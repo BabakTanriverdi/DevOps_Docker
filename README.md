@@ -147,7 +147,7 @@ cat README.md
 </td>
 <td width="50%">
 
-#### 📊 [Docker Stats](./docker-15-docker.top_stats-cp-diff-com...)
+#### 📊 [Docker Stats](./Extra-05_top_stats-cp-diff-commands)
 **Resource Monitoring**
 - ✅ CPU & memory tracking
 - ✅ Container diff
@@ -159,7 +159,7 @@ cat README.md
 <tr>
 <td>
 
-#### 🏗️ [Multi-Stage Builds](./docker-14-multi-stage-builds)
+#### 🏗️ [Multi-Stage Builds](./Extra-04_multi-stage-builds)
 **Optimized Images**
 - ✅ Build optimization
 - ✅ Layer caching
@@ -168,7 +168,7 @@ cat README.md
 </td>
 <td>
 
-#### 📤 [Commit & Export](./docker-16-docker-commit-export-impor...)
+#### 📤 [Commit & Export](./Extra_06-commit-export-import-save-load)
 **Image Portability**
 - ✅ Container to image
 - ✅ Import/export
